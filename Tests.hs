@@ -1,5 +1,8 @@
+import Control.Monad
 import Fizzbuzz
+import System.Exit
 import Test.QuickCheck
+import Test.QuickCheck.Test
 
 genFibonacci :: Gen Integer
 genFibonacci = (arbitrary :: Gen Integer) `suchThat` isFibonacci
@@ -17,7 +20,10 @@ prop_flamingoRule a i = flamingoRule i == a
 prop_fizzBuzzRule a i = fizzBuzzRule i == a
 
 main = do
-    quickCheck $ forAll genFibonacci $ prop_flamingoRule (Just "Flamingo")
-    quickCheck $ forAll genNotFibonacci $ prop_flamingoRule (Nothing)
-    quickCheck $ forAll (genDivisibleBy (3*5)) $ prop_fizzBuzzRule (Just "FizzBuzz")
-    quickCheck $ forAll (genNotDivisibleBy (3*5)) $ prop_fizzBuzzRule (Nothing)
+    let tests = [ quickCheckResult $ forAll genFibonacci $ prop_flamingoRule (Just "Flamingo")
+                , quickCheckResult $ forAll genNotFibonacci $ prop_flamingoRule (Nothing)
+                , quickCheckResult $ forAll (genDivisibleBy (3*5)) $ prop_fizzBuzzRule (Just "FizzBuzz")
+                , quickCheckResult $ forAll (genNotDivisibleBy (3*5)) $ prop_fizzBuzzRule (Nothing)]
+
+    success <- fmap (all isSuccess) . sequence $ tests
+    when (not success) $ exitFailure
