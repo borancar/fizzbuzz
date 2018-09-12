@@ -3,21 +3,25 @@ module Fizzbuzz where
 import Control.Monad
 import Data.Maybe
 
+divisibleByAll :: Integer -> [Integer] -> Bool
+divisibleByAll i d =
+    all (== 0) $ map (mod i) d
+
 fizzRule :: Integer -> Maybe String
 fizzRule i =
-    if i `mod` 3 == 0
+    if i `divisibleByAll` [3]
         then Just "Fizz"
         else Nothing
 
 buzzRule :: Integer -> Maybe String
 buzzRule i =
-    if i `mod` 5 == 0
+    if i `divisibleByAll` [5]
         then Just "Buzz"
         else Nothing
 
 fizzBuzzRule :: Integer -> Maybe String
 fizzBuzzRule i =
-    if i `mod` 3 == 0 && i `mod` 5 == 0
+    if i `divisibleByAll` [3,5]
         then Just "FizzBuzz"
         else Nothing
 
@@ -38,7 +42,7 @@ flamingoRule i =
 
 pinkFlamingoRule :: Integer -> Maybe String
 pinkFlamingoRule i =
-    if isFibonacci i && i `mod` 3 == 0 && i `mod` 5 == 0
+    if isFibonacci i && i `divisibleByAll` [3,5]
         then Just "Pink Flamingo"
         else Nothing
 
