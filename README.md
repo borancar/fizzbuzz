@@ -8,3 +8,10 @@ of the Fibonacci sequence, and "Pink Flamingo" when it is a multiple of 3 and 5
 and a member of the Fibonacci sequence. Hint: A number is Fibonacci if and only
 if one or both of (5\*n2 + 4) or (5\*n2 - 4) is a perfect square (i.e. A number
 made by squaring a whole number).
+
+# Running
+
+You need Haskell and Cabal (https://www.haskell.org/downloads#platform), then:
+- `cabal build`
+- `cabal run`
+- `cabal test`
