@@ -25,16 +25,18 @@ isSquare :: Integer -> Bool
 isSquare n = sq * sq == n where
     sq = floor $ sqrt $ (fromIntegral n::Double)
 
+isFibonacci :: Integer -> Bool
+isFibonacci n = isSquare (5 * n*n + 4) || isSquare (5 * n*n - 4)
+
 flamingoRule :: Integer -> Maybe String
 flamingoRule i =
-    if isSquare (5 * i*i + 4) || isSquare (5 * i*i - 4)
+    if isFibonacci i
         then Just "Flamingo"
         else Nothing
 
 pinkFlamingoRule :: Integer -> Maybe String
 pinkFlamingoRule i =
-    if (isSquare (5 * i*i + 4) || isSquare (5 * i*i - 4)) &&
-    i `mod` 3 == 0 && i `mod` 5 == 0
+    if isFibonacci i && i `mod` 3 == 0 && i `mod` 5 == 0
         then Just "Pink Flamingo"
         else Nothing
 
