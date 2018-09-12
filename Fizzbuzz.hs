@@ -1,3 +1,5 @@
+module Fizzbuzz where
+
 import Control.Monad
 import Data.Maybe
 
@@ -46,6 +48,3 @@ printRule i = Just $ show i
 evaluateRules :: Integer -> String
 evaluateRules i = fromJust $ msum $ sequence rules i where
     rules = [pinkFlamingoRule, flamingoRule, fizzBuzzRule, fizzRule, buzzRule, printRule]
-
-main = do
-    mapM_ (putStrLn . evaluateRules) [1..100]

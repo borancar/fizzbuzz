@@ -1,0 +1,21 @@
+name:                Fizzbuzz
+version:             0.1.0.0
+license:             PublicDomain
+author:              Boran Car
+maintainer:          boran.car@gmail.com
+build-type:          Simple
+extra-source-files:  ChangeLog.md, README.md
+cabal-version:       >=1.10
+
+executable Fizzbuzz
+  main-is:             Main.hs
+  other-modules:       Fizzbuzz
+  build-depends:       base >=4.10 && <4.11
+  default-language:    Haskell2010
+
+test-suite Tests
+  type:                exitcode-stdio-1.0
+  main-is:             Tests.hs
+  other-modules:       Fizzbuzz
+  build-depends:       base, QuickCheck
+  default-language:    Haskell2010
